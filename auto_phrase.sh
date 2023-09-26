@@ -23,12 +23,17 @@ fi
 MODEL=${MODEL:- ${MODELS_DIR}/DBLP}
 
 # If a command line argument is provided, use it as the RAW_TRAIN value. Else, use the default.
-if [ $# -eq 0 ]; then
+if [ -z "$1" ]; then
   DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
 else
   DEFAULT_TRAIN=$1
-  MODEL=${MODEL:- ${MODELS_DIR}/$2}
 fi
+
+if [ -n "$2" ]; then # check if 2nd arg is nonzero
+    MODEL=${MODELS_DIR}/$2
+fi
+
+echo ${MODEL}
 
 # RAW_TRAIN is the input of AutoPhrase, where each line is a single document.
 # DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
