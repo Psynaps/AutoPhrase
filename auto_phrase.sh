@@ -1,4 +1,5 @@
 #!/bin/bash
+# Arg 1 input training data, arg 2 output model name (directory name)
 # In effect, the commands below check to see if we're running in a Docker container--in that case, the (default) 
 # "data" and "models" directories will have been renamed, in order to avoid conflicts with mounted directories 
 # with the same names.
@@ -20,8 +21,17 @@ else
     MODELS_DIR=${MODELS_DIR:- default_models}
 fi
 MODEL=${MODEL:- ${MODELS_DIR}/DBLP}
+
+# If a command line argument is provided, use it as the RAW_TRAIN value. Else, use the default.
+if [ $# -eq 0 ]; then
+  DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
+else
+  DEFAULT_TRAIN=$1
+  MODEL=${MODEL:- ${MODELS_DIR}/$2}
+fi
+
 # RAW_TRAIN is the input of AutoPhrase, where each line is a single document.
-DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
+# DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
 RAW_TRAIN=${RAW_TRAIN:- $DEFAULT_TRAIN}
 # When FIRST_RUN is set to 1, AutoPhrase will run all preprocessing. 
 # Otherwise, AutoPhrase directly starts from the current preprocessed data in the tmp/ folder.
