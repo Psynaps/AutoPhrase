@@ -12,7 +12,21 @@ if [ -d "default_data" ]; then
 else
     DATA_DIR=${DATA_DIR:- data}
 fi
-TEXT_TO_SEG=${TEXT_TO_SEG:- ${DATA_DIR}/EN/DBLP.5K.txt}
+
+# If a command line argument is provided, use it as the RAW_TRAIN value. Else, use the default.
+if [ -z "$1" ]; then
+#   DEFAULT_TRAIN=${DATA_DIR}/EN/DBLP.txt
+    TEXT_TO_SEG=${TEXT_TO_SEG:- ${DATA_DIR}/EN/DBLP.5K.txt}
+else
+#   DEFAULT_TRAIN=$1
+    TEXT_TO_SEG=$1
+fi
+
+if [ -n "$2" ]; then # check if 2nd arg is nonzero
+    MODEL=${MODELS_DIR}/$2
+fi
+
+echo ${MODEL}
 HIGHLIGHT_MULTI=${HIGHLIGHT_MULTI:- 0.5}
 HIGHLIGHT_SINGLE=${HIGHLIGHT_SINGLE:- 0.8}
 
