@@ -3,6 +3,7 @@
 # In effect, the commands below check to see if we're running in a Docker container--in that case, the (default) 
 # "data" and "models" directories will have been renamed, in order to avoid conflicts with mounted directories 
 # with the same names.
+# Ex: ./auto_phrase.sh /Autophrase/data/EN/news.txt news 
 #
 # DATA_DIR is the default directory for reading data files.  Because this directory contains not only the default
 # dataset, but also language-specific files and "BAD_POS_TAGS.TXT", in most cases it's a bad idea to change it.

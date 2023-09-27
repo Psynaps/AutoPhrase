@@ -1,4 +1,10 @@
 #!/bin/bash
+# Arg 1 input training data, arg 2 output model name (directory name)
+# In effect, the commands below check to see if we're running in a Docker container--in that case, the (default) 
+# "data" and "models" directories will have been renamed, in order to avoid conflicts with mounted directories 
+# with the same names.
+# Ex: ./phrasal_segmentation.sh /Autophrase/data/EN/news.txt news 
+
 # As in "auto_phrase.sh", make the default model amd data directories depend on whether or not we're running
 # from a Docker container.
 if [ -d "default_models" ]; then
